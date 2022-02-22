@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Chart.Name }}-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Chart.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Chart.Name }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: {{ .Values.image.name }}:{{ .Values.image.version }}
+          env:
+            - name: POSTGRESQL_USER
+              value: {{ .Values.database.user }}
+            - name: POSTGRESQL_PASSWORD
+              value: "{{ .Values.database.password }}"
+            - name: POSTGRESQL_DATABASE
+              value: {{ .Values.database.name }}
+          ports:
+            - name: postgres
+              containerPort: {{ .Values.port }}
+          volumeMounts:
+            - name: db-data
+              mountPath: /var/lib/postgresql/data
+      volumes:
+        - name: db-data
+          emptyDir: { }
