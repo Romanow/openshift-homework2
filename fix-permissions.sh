@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-namespaces=$(oc get namespace | awk 'NR > 1 {print $1;}' | grep -v openshift)
+namespaces=$(oc get namespace | awk 'NR > 1 {print $1;}' | grep -v openshift | grep -v kube)
 
 for namespace in $namespaces; do
   echo "Processing $namespace"
