@@ -1,4 +1,5 @@
 domain: apps.edu.inno.tech
+nameSuffix: romanow
 service:
   port: 8080
   profile: k8s

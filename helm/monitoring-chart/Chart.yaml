@@ -3,8 +3,6 @@ name: monitoring
 type: application
 version: 1.0.0
 dependencies:
-  - name: node-exporter
-    version: 1.0.0
   - name: prometheus
     version: 1.0.0
   - name: grafana

@@ -18,8 +18,6 @@ spec:
         app.kubernetes.io/version: "{{ .Chart.Version }}"
         app.kubernetes.io/component: spring
     spec:
-      imagePullSecrets:
-        - name: private-registry
       containers:
         - name: {{ .Chart.Name }}-filebeat-sidecar
           image: "docker.elastic.co/beats/filebeat:{{ .Values.filebeat.version }}"

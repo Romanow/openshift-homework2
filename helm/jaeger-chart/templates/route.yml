@@ -9,7 +9,7 @@ metadata:
     haproxy.router.openshift.io/disable_cookies: "true"
     haproxy.router.openshift.io/balance: "roundrobin"
 spec:
-  host: {{ .Chart.Name }}.{{ .Values.domain }}
+  host: {{ .Chart.Name }}-{{ .Values.nameSuffix }}.{{ .Values.domain }}
   to:
     kind: Service
     name: {{ .Chart.Name }}-query-service
