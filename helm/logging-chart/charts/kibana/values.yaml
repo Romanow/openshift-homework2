@@ -7,3 +7,7 @@ elasticsearch:
   url: http://elasticsearch-service:9200
   username: logging
   password: qwerty
+
+memory:
+  requested: 512Mi
+  limit: 768Mi

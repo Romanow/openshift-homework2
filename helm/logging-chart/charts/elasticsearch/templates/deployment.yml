@@ -1,11 +1,8 @@
 apiVersion: apps/v1
-kind: StatefulSet
+kind: Deployment
 metadata:
-  name: {{ .Chart.Name }}-cluster
+  name: {{ .Chart.Name }}
 spec:
-  serviceName: {{ .Chart.Name }}-service
-  replicas: 3
-  podManagementPolicy: Parallel
   selector:
     matchLabels:
       app.kubernetes.io/name: {{ .Chart.Name }}
@@ -42,14 +39,15 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.name
-            - name: discovery.seed_hosts
-              value: "{{ .Chart.Name }}-cluster-0.{{ .Chart.Name }}-service,{{ .Chart.Name }}-cluster-1.{{ .Chart.Name }}-service,{{ .Chart.Name }}-cluster-2.{{ .Chart.Name }}-service"
-            - name: cluster.initial_master_nodes
-              value: "{{ .Chart.Name }}-cluster-0,{{ .Chart.Name }}-cluster-1,{{ .Chart.Name }}-cluster-2"
+            - name: discovery.type
+              value: "single-node"
             - name: xpack.security.enabled
               value: "true"
-            - name: ES_JAVA_OPTS
-              value: "-Xms{{ .Values.java.memory }} -Xmx{{ .Values.java.memory }}"
+          resources:
+            requests:
+              memory: {{ .Values.memory.requested }}
+            limits:
+              memory: {{ .Values.memory.limit }}
       volumes:
         - name: {{ .Chart.Name }}-data-volume
         - name: {{ .Chart.Name }}-configmap-volume

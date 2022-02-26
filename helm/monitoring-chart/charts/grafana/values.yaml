@@ -2,3 +2,7 @@ version: 8.2.2
 nameSuffix: romanow
 port: 3000
 domain: apps.edu.inno.tech
+
+memory:
+  requested: 512Mi
+  limit: 512Mi

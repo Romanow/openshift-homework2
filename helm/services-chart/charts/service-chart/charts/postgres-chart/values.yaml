@@ -7,3 +7,7 @@ database:
   name: services
   user: program
   password: test
+
+memory:
+  requested: 64Mi
+  limit: 128Mi

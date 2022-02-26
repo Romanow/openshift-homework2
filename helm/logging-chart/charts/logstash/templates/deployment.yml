@@ -27,6 +27,11 @@ spec:
           ports:
             - name: {{ .Chart.Name }}
               containerPort: {{ .Values.port }}
+          resources:
+            requests:
+              memory: {{ .Values.memory.requested }}
+            limits:
+              memory: {{ .Values.memory.limit }}
       volumes:
         - name: {{ .Chart.Name }}-config-volume
           configMap:

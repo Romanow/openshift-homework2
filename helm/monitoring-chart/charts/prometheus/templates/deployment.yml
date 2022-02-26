@@ -21,6 +21,11 @@ spec:
             - "--storage.tsdb.retention.time=12h"
             - "--config.file=/etc/prometheus/prometheus.yml"
             - "--storage.tsdb.path=/prometheus/"
+          resources:
+            requests:
+              memory: {{ .Values.memory.requested }}
+            limits:
+              memory: {{ .Values.memory.limit }}
           volumeMounts:
             - name: {{ .Chart.Name }}-config-volume
               mountPath: /etc/prometheus/

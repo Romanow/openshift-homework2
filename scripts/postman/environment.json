@@ -31,11 +31,6 @@
 			"key": "orderItemUid",
 			"value": "193e0208-3bbb-47bd-a934-70b414548290",
 			"enabled": true
-		},
-		{
-			"key": "userUid",
-			"value": "cb7fc736-71c1-4de8-8a09-045c336a1181",
-			"enabled": true
 		}
 	],
 	"_postman_variable_scope": "environment",

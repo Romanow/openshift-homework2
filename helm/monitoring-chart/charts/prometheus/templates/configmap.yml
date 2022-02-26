@@ -6,4 +6,29 @@ metadata:
     app.kubernetes.io/name: {{ .Chart.Name }}-configmap
 data:
   prometheus.yml: |-
-  {{- .Files.Get "config/prometheus.yml" | nindent 4 }}
+    global:
+      scrape_interval: 5s
+      evaluation_interval: 5s
+    scrape_configs:
+      - job_name: 'kubernetes-pods'
+        kubernetes_sd_configs:
+          - role: pod
+        basic_auth:
+          username: management
+          password: passwd
+        relabel_configs:
+          - source_labels: [ __meta_kubernetes_pod_annotation_prometheus_io_scrape ]
+            action: keep
+            regex: true
+          - source_labels: [ __meta_kubernetes_pod_label_app_kubernetes_io_component ]
+            action: keep
+            regex: 'spring'
+          - source_labels: [ __meta_kubernetes_namespace ]
+            action: keep
+            regex: '{{ .Release.Namespace }}'
+          - source_labels: [ __meta_kubernetes_pod_name ]
+            action: replace
+            target_label: kubernetes_pod_name
+          - source_labels: [ __meta_kubernetes_pod_annotation_prometheus_io_path ]
+            action: replace
+            target_label: __metrics_path__

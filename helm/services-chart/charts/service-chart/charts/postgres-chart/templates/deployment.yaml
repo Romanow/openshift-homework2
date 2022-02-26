@@ -24,6 +24,11 @@ spec:
               value: "{{ .Values.database.password }}"
             - name: POSTGRESQL_DATABASE
               value: {{ .Values.database.name }}
+          resources:
+            requests:
+              memory: {{ .Values.memory.requested }}
+            limits:
+              memory: {{ .Values.memory.limit }}
           ports:
             - name: postgres
               containerPort: {{ .Values.port }}

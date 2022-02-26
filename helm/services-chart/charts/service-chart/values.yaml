@@ -7,8 +7,8 @@ service:
     name:
     version:
   memory:
-    requested: 768
-    limit: 768
+    requested: 768Mi
+    limit: 768Mi
   metrics:
     path: "/manage/prometheus"
     username: management

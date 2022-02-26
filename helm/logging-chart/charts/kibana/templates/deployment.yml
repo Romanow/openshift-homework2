@@ -26,6 +26,11 @@ spec:
               value: "{{ .Values.elasticsearch.username }}"
             - name: ELASTICSEARCH_PASSWORD
               value: "{{ .Values.elasticsearch.password }}"
+          resources:
+            requests:
+              memory: {{ .Values.memory.requested }}
+            limits:
+              memory: {{ .Values.memory.limit }}
           ports:
             - name: {{ .Chart.Name }}
               containerPort: {{ .Values.port }}

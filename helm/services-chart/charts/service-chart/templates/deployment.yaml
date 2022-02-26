@@ -43,9 +43,9 @@ spec:
           image: {{ .Values.service.image.name }}:{{ .Values.service.image.version }}
           resources:
             requests:
-              memory: "{{ .Values.service.memory.requested }}Mi"
+              memory: {{ .Values.service.memory.requested }}
             limits:
-              memory: "{{ .Values.service.memory.limit }}Mi"
+              memory: {{ .Values.service.memory.limit }}
           env:
             - name: SPRING_PROFILES_ACTIVE
               value: {{ .Values.service.profile }}
