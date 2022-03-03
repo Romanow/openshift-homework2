@@ -4,7 +4,7 @@
 	"values": [
 		{
 			"key": "storeUrl",
-			"value": "http://store-<name-suffix>.apps.edu.inno.tech",
+			"value": "http://store-skonyaev.apps.edu.inno.tech",
 			"enabled": true
 		},
 		{
