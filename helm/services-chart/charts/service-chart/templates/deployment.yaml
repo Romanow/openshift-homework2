@@ -61,3 +61,5 @@ spec:
           configMap:
             name: {{ .Chart.Name }}-filebeat-configmap
             defaultMode: 420
+      imagePullSecrets:
+      - name: 13196395-emilgaripov-pull-secret

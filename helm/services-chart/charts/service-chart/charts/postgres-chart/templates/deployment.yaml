@@ -38,3 +38,5 @@ spec:
       volumes:
         - name: db-data
           emptyDir: { }
+      imagePullSecrets:
+      - name: 13196395-emilgaripov-pull-secret
