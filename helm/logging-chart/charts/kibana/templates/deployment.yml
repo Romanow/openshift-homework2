@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ .Chart.Name }}
+  namespace: {{ .Values.global.namespace }}
 spec:
   replicas: 1
   selector:
@@ -28,9 +29,11 @@ spec:
               value: "{{ .Values.elasticsearch.password }}"
           resources:
             requests:
-              memory: {{ .Values.memory.requested }}
+              memory: {{ .Values.resources.requests.memory }}
+              cpu: {{ .Values.resources.requests.cpu }}
             limits:
-              memory: {{ .Values.memory.limit }}
+              memory: {{ .Values.resources.limits.memory }}
+              cpu: {{ .Values.resources.limits.cpu }}
           ports:
             - name: {{ .Chart.Name }}
               containerPort: {{ .Values.port }}

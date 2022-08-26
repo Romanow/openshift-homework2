@@ -21,6 +21,13 @@ spec:
       containers:
         - name: {{ .Chart.Name }}-filebeat-sidecar
           image: "docker.elastic.co/beats/filebeat:{{ .Values.filebeat.version }}"
+          resources:
+            requests:
+              memory: "{{ .Values.filebeat.resources.requests.memory }}"
+              cpu: "{{ .Values.filebeat.resources.requests.cpu }}"
+            limits:
+              memory: "{{ .Values.filebeat.resources.limits.memory }}"
+              cpu: "{{ .Values.filebeat.resources.limits.cpu }}"
           volumeMounts:
             - name: {{ .Chart.Name }}-logs
               mountPath: "/var/log/{{ .Chart.Name }}-service/"
@@ -28,24 +35,15 @@ spec:
               mountPath: /usr/share/filebeat/filebeat.yml
               subPath: filebeat.yml
 
-        - name: {{ .Chart.Name }}-jaeger-agent-sidecar
-          image: "jaegertracing/jaeger-agent:{{ .Values.jaeger.version }}"
-          env:
-            - name: REPORTER_GRPC_HOST_PORT
-              value: jaeger-collector-service:14250
-          ports:
-            - name: jaeger
-              containerPort: {{ .Values.jaeger.port }}
-              protocol: UDP
-
         - name: {{ .Chart.Name }}
-          imagePullPolicy: Always
           image: {{ .Values.service.image.name }}:{{ .Values.service.image.version }}
           resources:
             requests:
-              memory: {{ .Values.service.memory.requested }}
+              memory: "{{ .Values.service.resources.requests.memory }}"
+              cpu: "{{ .Values.service.resources.requests.cpu }}"
             limits:
-              memory: {{ .Values.service.memory.limit }}
+              memory: "{{ .Values.service.resources.limits.memory }}"
+              cpu: "{{ .Values.service.resources.limits.cpu }}"
           env:
             - name: SPRING_PROFILES_ACTIVE
               value: {{ .Values.service.profile }}
@@ -55,6 +53,7 @@ spec:
           volumeMounts:
             - name: {{ .Chart.Name }}-logs
               mountPath: "/var/log/{{ .Chart.Name }}-service/"
+
       volumes:
         - name: {{ .Chart.Name }}-logs
         - name: {{ .Chart.Name }}-filebeat-config-volume

@@ -1,14 +1,17 @@
-domain: apps.edu.inno.tech
-nameSuffix: romanow
 service:
   port: 8080
   profile: k8s
+  ingress: false
   image:
     name:
     version:
-  memory:
-    requested: 768Mi
-    limit: 768Mi
+  resources:
+    requests:
+      cpu: 100m
+      memory: 768Mi
+    limits:
+      cpu: 100m
+      memory: 1024Mi
   metrics:
     path: "/manage/prometheus"
     username: management
@@ -18,7 +21,10 @@ filebeat:
   version: 7.15.0
   logstash:
     port: 5044
-
-jaeger:
-  version: 1.22.0
-  port: 6831
+  resources:
+    requests:
+      cpu: 50m
+      memory: 128Mi
+    limits:
+      cpu: 50m
+      memory: 128Mi

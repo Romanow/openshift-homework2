@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ .Chart.Name }}
+  namespace: {{ .Values.global.namespace }}
 spec:
   replicas: 1
   selector:
@@ -17,15 +18,20 @@ spec:
       containers:
         - name: {{ .Chart.Name }}
           image: "prom/prometheus:{{ .Values.version }}"
+          ports:
+            - name: {{ .Chart.Name }}
+              containerPort: {{ .Values.port }}
+          resources:
+            limits:
+              memory: {{ .Values.resources.limits.memory }}
+              cpu: {{ .Values.resources.limits.cpu }}
+            requests:
+              memory: {{ .Values.resources.requests.memory }}
+              cpu: {{ .Values.resources.requests.cpu }}
           args:
             - "--storage.tsdb.retention.time=12h"
             - "--config.file=/etc/prometheus/prometheus.yml"
             - "--storage.tsdb.path=/prometheus/"
-          resources:
-            requests:
-              memory: {{ .Values.memory.requested }}
-            limits:
-              memory: {{ .Values.memory.limit }}
           volumeMounts:
             - name: {{ .Chart.Name }}-config-volume
               mountPath: /etc/prometheus/

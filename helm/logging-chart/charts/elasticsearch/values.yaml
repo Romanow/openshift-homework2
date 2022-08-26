@@ -1,4 +1,5 @@
 version: 7.15.0
+
 username: logging
 password: qwerty
 
@@ -6,6 +7,10 @@ ports:
   http: 9200
   communication: 9300
 
-memory:
-  requested: 768Mi
-  limit: 768Mi
+resources:
+  requests:
+    cpu: 100m
+    memory: 1024Mi
+  limits:
+    cpu: 200m
+    memory: 2048Mi

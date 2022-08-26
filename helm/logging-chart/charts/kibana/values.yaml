@@ -1,13 +1,15 @@
 version: 7.15.0
-nameSuffix: romanow
 port: 5601
-domain: apps.edu.inno.tech
 
 elasticsearch:
   url: http://elasticsearch-service:9200
   username: logging
   password: qwerty
 
-memory:
-  requested: 512Mi
-  limit: 768Mi
+resources:
+  requests:
+    cpu: 100m
+    memory: 768Mi
+  limits:
+    cpu: 200m
+    memory: 1024Mi

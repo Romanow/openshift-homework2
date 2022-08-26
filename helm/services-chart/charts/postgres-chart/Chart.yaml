@@ -1,4 +1,4 @@
 apiVersion: v2
-name: postgres
+name: postgres-chart
 type: application
 version: 1.0.0
