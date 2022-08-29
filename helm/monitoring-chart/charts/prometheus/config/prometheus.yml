@@ -3,14 +3,6 @@ global:
   evaluation_interval: 5s
 
 scrape_configs:
-  - job_name: 'node-exporter'
-    kubernetes_sd_configs:
-      - role: endpoints
-    relabel_configs:
-      - source_labels: [ __meta_kubernetes_endpoints_name ]
-        regex: 'node-exporter-service'
-        action: keep
-
   - job_name: 'kubernetes-nodes'
     scheme: https
     tls_config:

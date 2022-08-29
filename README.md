@@ -7,8 +7,20 @@
     2. настроить Alerting в Telegram / Slack если потребление памяти больше некоторого порога (выбираете сами по
        графику).
 2. ELK Stack:
-    1. в Kibana построить график количества сообщений в логах за минуту в разрезе Log Level (debug, info, warn, error);
+    1. в Kibana построить график количества сообщений в логах в разрезе Log Level (debug, info, warn, error);
     2. в Kibana построить график количества уникальных запросов за минуту (уникальные TraceId).
+
+## Создание Telegram Bot
+
+1. Создать бота через `@BotFather`
+   ```
+   /newbot
+   name: k8s_monitoring_<your-name>
+   id: k8s_monitoring_bot
+   ```
+2. Создать канал K8S Monitoring, добавить `@k8s_monitoring_<your-name>` как администратора. Отправить **хотя бы одно
+   сообщение** в группу.
+3. После этого через Telegram API получить chart ID: `http://api.telegram.org/bot<token>/getUpdates`
 
 ## Запуск minikube
 
