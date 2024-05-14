@@ -18,7 +18,7 @@ spec:
       terminationGracePeriodSeconds: 10
       containers:
         - name: {{ .Chart.Name }}
-          image: "docker.elastic.co/elasticsearch/elasticsearch:{{ .Values.version }}"
+          image: "elastic/elasticsearch:{{ .Values.version }}"
           ports:
             - name: http
               containerPort: {{ .Values.ports.http }}

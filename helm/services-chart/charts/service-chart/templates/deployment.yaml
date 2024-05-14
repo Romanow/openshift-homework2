@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - name: {{ .Chart.Name }}-filebeat-sidecar
-          image: "docker.elastic.co/beats/filebeat:{{ .Values.filebeat.version }}"
+          image: "elastic/filebeat:{{ .Values.filebeat.version }}"
           resources:
             requests:
               memory: "{{ .Values.filebeat.resources.requests.memory }}"

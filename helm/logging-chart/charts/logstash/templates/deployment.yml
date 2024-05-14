@@ -19,7 +19,7 @@ spec:
       terminationGracePeriodSeconds: 5
       containers:
         - name: {{ .Chart.Name }}
-          image: "docker.elastic.co/logstash/logstash:{{ .Values.version }}"
+          image: "elastic/logstash:{{ .Values.version }}"
           volumeMounts:
             - name: {{ .Chart.Name }}-config-volume
               mountPath: /usr/share/logstash/config
